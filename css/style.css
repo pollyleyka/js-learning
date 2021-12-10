@@ -13,3 +13,21 @@ gap: 10px 0;
 justify-content: end;
 
 }
+.invalid {
+  border: 2px solid red;
+}
+.hidden {
+  display: none;
+}
+.password {
+  position: relative;
+}
+.eye, .eye-slash {
+  position: absolute;
+  padding: 4px;
+  right: 0;
+  width: 18px
+}
+.eye {
+  height: 14px;
+}
