@@ -11,7 +11,7 @@
  // таким образом оптимизировать нельзя, не будут находиться значения т.к. не работает вэлью. Либо я не знаю как можно это обойти.
 
 
- //подсвечиваем красным поле ввода если не выполняются условия пароля:
+ //подсвечиваем красным поле ввода gfhjkz если не выполняются условия:
  password.addEventListener('input', (event) => {
    const upRegister = /[A-Z]/.test(password.value);
    const hasLowerCase = /[a-z]/.test(password.value);
@@ -22,6 +22,15 @@
      event.target.classList.remove('invalid');
    }
  });
+ //подсвечиваем красным поле проверки пароля ввода если не равен полю пароля:
+ pwdConfirm.addEventListener('input', (event) => {
+   if (pwdConfirm.value !== password.value) {
+     event.target.classList.add('invalid');
+   } else {
+     event.target.classList.remove('invalid');
+   }
+ });
+
 
  // верификация при нажатии кнопки отправить
  form.addEventListener('submit', (evt) => {
