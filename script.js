@@ -47,29 +47,43 @@
    }
  });
 
-
  //отображение пароля по клику на глаз
+
  // первый вариант с заменой ссылки на картинку в одном теге img. работает при первом и втором нажатии, далее при клике продолжает повторять вторую часть кода. 
 
- eyeBtn = document.querySelector(".eye");
- eyeBtnTwo = document.querySelector(".eye-two")
+ //  eyeBtn = document.querySelector(".eye");
+ //  eyeBtnTwo = document.querySelector(".eye-two");
 
- eyeBtn.addEventListener('click', (event) => {
-   const btn = event.target;
-   eyeBtn.setAttribute("src", "pic/eye.png");
-   eyeBtnTwo.setAttribute("src", "pic/eye.png");
-   btn.parentElement.querySelector('.password').type = 'text';
-   eyeBtnTwo.parentElement.querySelector('.password').type = 'text';
-   eyeBtn.addEventListener('click', (event) => {
-     const btn = event.target;
-     eyeBtn.setAttribute("src", "pic/eye-slash.png");
-     eyeBtnTwo.setAttribute("src", "pic/eye-slash.png");
-     btn.parentElement.querySelector('.password').type = 'password';
-     eyeBtnTwo.parentElement.querySelector('.password').type = 'password';
-   });
- });
+ //  eyeBtn.addEventListener('click', (event) => {
+ //    const btn = event.target;
+ //    eyeBtn.setAttribute("src", "pic/eye.png");
+ //    eyeBtnTwo.setAttribute("src", "pic/eye.png");
+ //    btn.parentElement.querySelector('.password').type = 'text';
+ //    eyeBtnTwo.parentElement.querySelector('.password').type = 'text';
 
 
+
+ //    eyeBtn.addEventListener('click', (event) => {
+ //      const btn = event.target;
+ //      eyeBtn.setAttribute("src", "pic/eye-slash.png");
+ //      eyeBtnTwo.setAttribute("src", "pic/eye-slash.png");
+ //      btn.parentElement.querySelector('.password').type = 'password';
+ //      eyeBtnTwo.parentElement.querySelector('.password').type = 'password';
+ //    });
+ //  });
+
+  //мне подсказали
+  const eyeButtons = Array.from(document.querySelectorAll(".eye"));
+
+  eyeButtons.forEach(button => {
+    let isVisible = false;
+    button.addEventListener('click', (e) => {
+      const input = button.parentElement.querySelector('.password');
+      isVisible = !isVisible;
+      button.src = isVisible ? 'pic/eye.png' : 'pic/eye-slash.png';
+      input.type = isVisible ? 'text' : 'password';
+    });
+  });
 
  //этот вариант хорош тем, что при добавлении новых полей там будет автоматически работать глаз, дополнительный код писать в таком случае не нужно.
 
@@ -95,5 +109,4 @@
  //      btn.parentElement.querySelector('.password').type = 'password';
 
  //    });
-
  //  });
