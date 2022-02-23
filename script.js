@@ -11,7 +11,7 @@
  // таким образом оптимизировать нельзя, не будут находиться значения т.к. не работает вэлью. Либо я не знаю как можно это обойти.
 
 
- //подсвечиваем красным поле ввода gfhjkz если не выполняются условия:
+ //подсвечиваем красным поле ввода пароля если не выполняются условия:
  password.addEventListener('input', (event) => {
    const upRegister = /[A-Z]/.test(password.value);
    const hasLowerCase = /[a-z]/.test(password.value);
@@ -52,15 +52,20 @@
  // первый вариант с заменой ссылки на картинку в одном теге img. работает при первом и втором нажатии, далее при клике продолжает повторять вторую часть кода. 
 
  eyeBtn = document.querySelector(".eye");
+ eyeBtnTwo = document.querySelector(".eye-two")
 
  eyeBtn.addEventListener('click', (event) => {
    const btn = event.target;
    eyeBtn.setAttribute("src", "pic/eye.png");
+   eyeBtnTwo.setAttribute("src", "pic/eye.png");
    btn.parentElement.querySelector('.password').type = 'text';
+   eyeBtnTwo.parentElement.querySelector('.password').type = 'text';
    eyeBtn.addEventListener('click', (event) => {
      const btn = event.target;
      eyeBtn.setAttribute("src", "pic/eye-slash.png");
+     eyeBtnTwo.setAttribute("src", "pic/eye-slash.png");
      btn.parentElement.querySelector('.password').type = 'password';
+     eyeBtnTwo.parentElement.querySelector('.password').type = 'password';
    });
  });
 
