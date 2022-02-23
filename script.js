@@ -10,7 +10,7 @@
  //const hasDigital = /\d/.test(password.value);
  // таким образом оптимизировать нельзя, не будут находиться значения т.к. не работает вэлью. Либо я не знаю как можно это обойти.
 
- 
+
  //подсвечиваем красным поле ввода если не выполняются условия пароля:
  password.addEventListener('input', (event) => {
    const upRegister = /[A-Z]/.test(password.value);
@@ -40,15 +40,25 @@
 
 
  //отображение пароля по клику на глаз
+ // первый вариант с заменой ссылки на картинку в одном теге img. работает при первом и втором нажатии, далее при клике продолжает повторять вторую часть кода. 
 
  eyeBtn = document.querySelector(".eye");
+
  eyeBtn.addEventListener('click', (event) => {
    const btn = event.target;
    eyeBtn.setAttribute("src", "pic/eye.png");
    btn.parentElement.querySelector('.password').type = 'text';
+   eyeBtn.addEventListener('click', (event) => {
+     const btn = event.target;
+     eyeBtn.setAttribute("src", "pic/eye-slash.png");
+     btn.parentElement.querySelector('.password').type = 'password';
+   });
  });
 
- //доделаю
+
+
+ //этот вариант хорош тем, что при добавлении новых полей там будет автоматически работать глаз, дополнительный код писать в таком случае не нужно.
+
 
  //  const eyeBtn = document.querySelectorAll(".eye");
  //  const eyeSlashBtn = document.querySelectorAll(".eye-slash");
