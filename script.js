@@ -11,6 +11,10 @@
  // таким образом оптимизировать нельзя, не будут находиться значения т.к. не работает вэлью. Либо я не знаю как можно это обойти.
 
 
+ function someFunc() {
+  ....
+}
+
  //подсвечиваем красным поле ввода пароля если не выполняются условия:
  password.addEventListener('input', (event) => {
    const upRegister = /[A-Z]/.test(password.value);
@@ -31,7 +35,6 @@
    }
  });
 
-
  // верификация при нажатии кнопки отправить
  form.addEventListener('submit', (evt) => {
    evt.preventDefault();
@@ -46,6 +49,8 @@
      console.log("no");
    }
  });
+
+
 
  //отображение пароля по клику на глаз
 
@@ -72,18 +77,18 @@
  //    });
  //  });
 
-  //мне подсказали
-  const eyeButtons = Array.from(document.querySelectorAll(".eye"));
+ //мне подсказали
+ const eyeButtons = Array.from(document.querySelectorAll(".eye"));
 
-  eyeButtons.forEach(button => {
-    let isVisible = false;
-    button.addEventListener('click', (e) => {
-      const input = button.parentElement.querySelector('.password');
-      isVisible = !isVisible;
-      button.src = isVisible ? 'pic/eye.png' : 'pic/eye-slash.png';
-      input.type = isVisible ? 'text' : 'password';
-    });
-  });
+ eyeButtons.forEach(button => {
+   let isVisible = false;
+   button.addEventListener('click', (e) => {
+     const input = button.parentElement.querySelector('.password');
+     isVisible = !isVisible;
+     button.src = isVisible ? 'pic/eye.png' : 'pic/eye-slash.png';
+     input.type = isVisible ? 'text' : 'password';
+   });
+ });
 
  //этот вариант хорош тем, что при добавлении новых полей там будет автоматически работать глаз, дополнительный код писать в таком случае не нужно.
 
@@ -110,3 +115,14 @@
 
  //    });
  //  });
+
+ // черновик
+
+ //  function myFunction() {
+ //    var x = document.getElementById("myInput");
+ //    if (x.type === "password") {
+ //      x.type = "text";
+ //    } else {
+ //      x.type = "password";
+ //    }
+ //  }
