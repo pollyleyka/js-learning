@@ -6,10 +6,36 @@ form {
 }
 
 fieldset {
-display: grid;
-grid-template-columns: 200px 200px;
-border: 0px;
-gap: 10px 0;
-justify-content: end;
+  display: grid;
+  grid-template-columns: 200px 200px;
+  border: 0px;
+  gap: 10px 0;
+  justify-content: end;
 
+}
+
+.invalid {
+  border: 2px solid red;
+}
+
+.hidden {
+  display: none;
+}
+
+.password {
+  position: relative;
+}
+
+.eye,
+.eye-slash,
+.eye-two {
+  position: absolute;
+  padding: 4px;
+  right: 0;
+  width: 18px
+}
+
+.eye,
+.eye-two {
+  height: 14px;
 }

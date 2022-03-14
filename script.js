@@ -1,29 +1,128 @@
-let form = document.querySelector('.form');
-let password = document.getElementById('password-input');
-let pwdConfirm = document.getElementById('password-input-valid');
-let pwdValue = password.value;
-const hasUpperCase = /[A-Z]/.test(pwdValue);
-const hasLowerCase = /[a-z]/.test(pwdValue);
-const hasDigital = /\d/.test(pwdValue);
+ const form = document.querySelector('.form');
+ const password = document.getElementById('password-input');
+ const pwdConfirm = document.getElementById('password-input-valid');
 
-const checkPassword = () => {
-  if (password.value !== pwdConfirm.value) {
-    return false;
-  }
-  else if (pwdValue.length < 8) {
-    return false;
- }
-  else
- if (hasUpperCase && hasDigital && hasLowerCase) {
-    return true;
-  }
-};
+ //попытка оптимизировать не удалась:
+ //const pwdInput = password.value; //что не так с этой переменной!??? не работает если объявлять за пределами функции. внутри функции все ок.
+ //let pwdInput = password.value; так тоже не работает. Видимо работает только если объявлять внутри функции т.к. данные динамические.
+ //let upRegister = /[A-Z]/.test(password.value); - зе сейм тк тут тоже вэлью.
+ //const hasLowerCase = /[a-z]/.test(password.value);
+ //const hasDigital = /\d/.test(password.value);
+ // таким образом оптимизировать нельзя, не будут находиться значения т.к. не работает вэлью. Либо я не знаю как можно это обойти.
 
-form.addEventListener ('submit', function(event) {
-event.preventDefault();
-const valid = checkPassword()
-if (valid) {
-  form.submit();
+
+ function someFunc() {
+  ....
 }
-else console.log('no');
-});
+
+ //подсвечиваем красным поле ввода пароля если не выполняются условия:
+ password.addEventListener('input', (event) => {
+   const upRegister = /[A-Z]/.test(password.value);
+   const hasLowerCase = /[a-z]/.test(password.value);
+   const hasDigital = /\d/.test(password.value);
+   if (password.value.length < 8 || !upRegister || !hasDigital || !hasLowerCase) {
+     event.target.classList.add('invalid');
+   } else {
+     event.target.classList.remove('invalid');
+   }
+ });
+ //подсвечиваем красным поле проверки пароля ввода если не равен полю пароля:
+ pwdConfirm.addEventListener('input', (event) => {
+   if (pwdConfirm.value !== password.value) {
+     event.target.classList.add('invalid');
+   } else {
+     event.target.classList.remove('invalid');
+   }
+ });
+
+ // верификация при нажатии кнопки отправить
+ form.addEventListener('submit', (evt) => {
+   evt.preventDefault();
+   let upRegister = /[A-Z]/.test(password.value);
+   let hasLowerCase = /[a-z]/.test(password.value);
+   let hasDigital = /\d/.test(password.value);
+   if (password.value.length >= 8 &&
+     password.value === pwdConfirm.value &&
+     upRegister && hasDigital && hasLowerCase) {
+     form.submit();
+   } else {
+     console.log("no");
+   }
+ });
+
+
+
+ //отображение пароля по клику на глаз
+
+ // первый вариант с заменой ссылки на картинку в одном теге img. работает при первом и втором нажатии, далее при клике продолжает повторять вторую часть кода. 
+
+ //  eyeBtn = document.querySelector(".eye");
+ //  eyeBtnTwo = document.querySelector(".eye-two");
+
+ //  eyeBtn.addEventListener('click', (event) => {
+ //    const btn = event.target;
+ //    eyeBtn.setAttribute("src", "pic/eye.png");
+ //    eyeBtnTwo.setAttribute("src", "pic/eye.png");
+ //    btn.parentElement.querySelector('.password').type = 'text';
+ //    eyeBtnTwo.parentElement.querySelector('.password').type = 'text';
+
+
+
+ //    eyeBtn.addEventListener('click', (event) => {
+ //      const btn = event.target;
+ //      eyeBtn.setAttribute("src", "pic/eye-slash.png");
+ //      eyeBtnTwo.setAttribute("src", "pic/eye-slash.png");
+ //      btn.parentElement.querySelector('.password').type = 'password';
+ //      eyeBtnTwo.parentElement.querySelector('.password').type = 'password';
+ //    });
+ //  });
+
+ //мне подсказали
+ const eyeButtons = Array.from(document.querySelectorAll(".eye"));
+
+ eyeButtons.forEach(button => {
+   let isVisible = false;
+   button.addEventListener('click', (e) => {
+     const input = button.parentElement.querySelector('.password');
+     isVisible = !isVisible;
+     button.src = isVisible ? 'pic/eye.png' : 'pic/eye-slash.png';
+     input.type = isVisible ? 'text' : 'password';
+   });
+ });
+
+ //этот вариант хорош тем, что при добавлении новых полей там будет автоматически работать глаз, дополнительный код писать в таком случае не нужно.
+
+
+ //  const eyeBtn = document.querySelectorAll(".eye");
+ //  const eyeSlashBtn = document.querySelectorAll(".eye-slash");
+
+ //  eyeSlashBtn.forEach((b) => {
+ //    b.addEventListener('click', (event) => {
+ //      const btn = event.target;
+ //      btn.classList.add('hidden');
+ //      btn.parentElement.querySelector('.eye').classList.remove('hidden');
+ //      btn.parentElement.querySelector('.password').type = 'text';
+
+ //    });
+ //  });
+
+ //  eyeBtn.forEach((c) => {
+ //    c.addEventListener('click', (event) => {
+ //      const btn = event.target;
+ //      btn.classList.add('hidden');
+ //      btn.parentElement.querySelector('.eye-slash').classList.remove('hidden');
+ //      btn.parentElement.querySelector('.password').type = 'password';
+
+ //    });
+ //  });
+
+ // черновик
+
+ //  function myFunction() {
+ //    var x = document.getElementById("myInput");
+ //    if (x.type === "password") {
+ //      x.type = "text";
+ //    } else {
+ //      x.type = "password";
+ //    }
+ //  }
